@@ -1,3 +1,6 @@
+#include "Tile.h"
+#include "Board.h"
+
 /*
 * CLASS BOARD
 * Display the game board
@@ -22,7 +25,12 @@
 * 
 * 2. CLASS DIRECTION
 * Make working with directional commmands easier and more intuitive (enum direction)
-
-
-
 */
+
+int main()
+{
+    Board board{};
+    std::cout << board;
+
+    return 0;
+}
