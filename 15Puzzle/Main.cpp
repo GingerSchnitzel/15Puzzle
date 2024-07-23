@@ -1,5 +1,6 @@
 #include "Tile.h"
 #include "Board.h"
+#include "Helper.h"
 
 /*
 * CLASS BOARD
@@ -31,7 +32,7 @@ int main()
 {
     Board board{};
     std::cout << board;
-    [[maybe_unused]] char command = UserInput::userCommand();
+    [[maybe_unused]] char command = BoardInteraction::userCommand();
 
     return 0;
 }

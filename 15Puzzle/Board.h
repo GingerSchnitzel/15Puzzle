@@ -1,6 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 #include "Tile.h"
+#include "Helper.h"
 #include <array>
 #include <cstdint>
 
