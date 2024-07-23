@@ -2,6 +2,7 @@
 #include "Board.h"
 #include "Direction.h"
 
+
 /*
 * CLASS BOARD
 * Display the game board
@@ -33,6 +34,12 @@ int main()
     Board board{};
     std::cout << board;
     [[maybe_unused]] char command = BoardInteraction::userCommand();
+
+    std::cout << "Generating random direction... " << Direction::selectRandomDirection() << '\n';
+    std::cout << "Generating random direction... " << Direction::selectRandomDirection() << '\n';
+    std::cout << "Generating random direction... " << Direction::selectRandomDirection() << '\n';
+    std::cout << "Generating random direction... " << Direction::selectRandomDirection() << "\n\n";
+
 
     return 0;
 }
