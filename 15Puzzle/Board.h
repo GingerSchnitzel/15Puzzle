@@ -8,6 +8,7 @@ namespace BoardConstants
 {
 	constexpr int32_t maxTileNumber{ 15 };
 	constexpr size_t boardSize{ 4 };
+	constexpr int32_t consoleLines{ 25 };
 }
 
 
@@ -36,21 +37,32 @@ public:
 			}
 		}
 	}
-		friend std::ostream& operator<< (std::ostream & out, const Board & board)
 
+	static void printEmptyLines(int32_t count)
+	{
+		for (int i{ 0 }; i < count; ++i)
 		{
-			for (size_t i{ 0 }; i < board.m_tileBoard.size(); ++i)
-			{
-				for (size_t j{ 0 }; j < board.m_tileBoard.size(); ++j)
-				{
-					out << board.m_tileBoard[i][j];
-				}
-				out << '\n';
-			}
-			return out;
+			std::cout << '\n';
 		}
+	}
+
+	friend std::ostream& operator<< (std::ostream& out, const Board& board)
+
+	{
+		printEmptyLines(BoardConstants::consoleLines);
+
+		for (size_t i{ 0 }; i < board.m_tileBoard.size(); ++i)
+		{
+			for (size_t j{ 0 }; j < board.m_tileBoard.size(); ++j)
+			{
+				out << board.m_tileBoard[i][j];
+			}
+			out << '\n';
+		}
+		return out;
+	}
 
 
-	};
+};
 
 #endif
