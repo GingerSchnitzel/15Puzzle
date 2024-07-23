@@ -1,6 +1,6 @@
 #include "Tile.h"
 #include "Board.h"
-#include "Helper.h"
+#include "Direction.h"
 
 /*
 * CLASS BOARD
