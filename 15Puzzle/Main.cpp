@@ -31,6 +31,7 @@ int main()
 {
     Board board{};
     std::cout << board;
+    [[maybe_unused]] char command = UserInput::userCommand();
 
     return 0;
 }
