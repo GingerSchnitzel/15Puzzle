@@ -1,6 +1,7 @@
 #include "Tile.h"
 #include "Board.h"
 #include "Direction.h"
+#include "Point.h"
 
 
 /*

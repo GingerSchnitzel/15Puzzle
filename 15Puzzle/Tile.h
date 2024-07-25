@@ -1,5 +1,6 @@
 #ifndef TILE_H
 #define TILE_H
+
 #include <iostream>
 #include <cstdint>
 /*
@@ -17,9 +18,7 @@ public:
 
 	explicit Tile(int32_t number)
 		: m_number(number)
-	{
-
-	}
+	{}
 
 	const int32_t& getNumber() const { return m_number; }
 	bool isEmpty() const { return (m_number == 0); }

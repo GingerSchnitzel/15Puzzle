@@ -1,5 +1,6 @@
 #ifndef DIRECTION_H
 #define DIRECTION_H
+
 #include <random>
 #include <cstdint>
 #include <cassert>
@@ -26,7 +27,7 @@ private:
 	Orientation m_orientation;
 
 public:
-
+	
 	explicit Direction(Orientation orientation)
 		:m_orientation{ orientation }
 	{}
