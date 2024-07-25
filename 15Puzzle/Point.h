@@ -32,7 +32,10 @@ public:
 			{
 				--m_coordinates.second;
 			}
-			std::cout << "Can't move up anymore!\n";
+			else
+			{ 
+				std::cout << "Can't move up anymore!\n";
+			}
 		}
 		else if (direction == Direction{ Orientation::down })
 		{
@@ -40,7 +43,10 @@ public:
 			{
 				++m_coordinates.second;
 			}
-			std::cout << "Can't move down anymore!\n";
+			else 
+			{
+				std::cout << "Can't move down anymore!\n";
+			};
 		}
 		else if (direction == Direction{ Orientation::right })
 		{
@@ -48,7 +54,10 @@ public:
 			{
 				++m_coordinates.first;
 			}
-			std::cout << "Can't move right anymore!\n";
+			else
+			{
+				std::cout << "Can't move right anymore!\n";
+			}
 		}
 		else if (direction == Direction{ Orientation::left })
 		{
@@ -56,7 +65,10 @@ public:
 			{
 				--m_coordinates.first;
 			}
-			std::cout << "Can't move left anymore!\n";
+			else
+			{
+				std::cout << "Can't move left anymore!\n";
+			}
 		}
 		return *this;
 	}
