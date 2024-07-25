@@ -3,8 +3,10 @@
 
 #include "Tile.h"
 #include "Direction.h"
+#include "Point.h"
 #include <array>
 #include <cstdint>
+#include <utility>
 
 namespace BoardConstants
 {
@@ -23,9 +25,11 @@ class Board
 {
 private:
 	std::array <std::array<Tile, BoardConstants::boardSize>, BoardConstants::boardSize> m_tileBoard;
+	Point emptyTileCoordinates;
 public:
 	Board()
-		:m_tileBoard{}
+		: m_tileBoard{}
+		, emptyTileCoordinates{}
 	{
 		int32_t value = 1;
 		for (size_t i{ 0 }; i < BoardConstants::boardSize; ++i)
@@ -40,6 +44,8 @@ public:
 				else
 				{
 					m_tileBoard[i][j] = Tile(0);
+					// No other conversion neccessary as the last position has the same coordinates in row/column as well as XoY system
+					emptyTileCoordinates.setCoordinates(static_cast<int32_t>(i), static_cast<int32_t>(j));
 				}
 			}
 		}
@@ -69,6 +75,18 @@ public:
 		return out;
 	}
 
+	void moveTile(Direction direction)
+	{
+		Direction oppositeDirection = -direction;
+		Point previousEmpty{ emptyTileCoordinates };
+		Point adjacentToEmptyPosition = previousEmpty.getAdjacentPoint(oppositeDirection);
+		if (adjacentToEmptyPosition != emptyTileCoordinates)
+		{
+			// Reversed because they are stored in row major order in memory
+			std::swap(m_tileBoard[static_cast<size_t>(emptyTileCoordinates.getY())][static_cast<size_t>(emptyTileCoordinates.getX())],
+				m_tileBoard[static_cast<size_t>(adjacentToEmptyPosition.getY())][static_cast<size_t>(adjacentToEmptyPosition.getX())]);
+		}
+	}
 
 };
 
