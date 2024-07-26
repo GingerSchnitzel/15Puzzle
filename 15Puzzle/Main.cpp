@@ -38,7 +38,8 @@ int main()
     [[maybe_unused]] char command = BoardInteraction::userCommand();
 
     board.moveTile(BoardInteraction::charToDirection(command));
-    std::cout << board;
+    std::cout << board << '\n';
+    board.printEmptyTile();
     
 
 

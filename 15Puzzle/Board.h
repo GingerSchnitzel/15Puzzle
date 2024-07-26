@@ -7,6 +7,7 @@
 #include <array>
 #include <cstdint>
 #include <utility>
+#include <iostream>
 
 namespace BoardConstants
 {
@@ -25,11 +26,12 @@ class Board
 {
 private:
 	std::array <std::array<Tile, BoardConstants::boardSize>, BoardConstants::boardSize> m_tileBoard;
-	Point emptyTileCoordinates;
+	Point m_emptyTileCoordinates;
+
 public:
 	Board()
 		: m_tileBoard{}
-		, emptyTileCoordinates{}
+		, m_emptyTileCoordinates{}
 	{
 		int32_t value = 1;
 		for (size_t i{ 0 }; i < BoardConstants::boardSize; ++i)
@@ -45,7 +47,7 @@ public:
 				{
 					m_tileBoard[i][j] = Tile(0);
 					// No other conversion neccessary as the last position has the same coordinates in row/column as well as XoY system
-					emptyTileCoordinates.setCoordinates(static_cast<int32_t>(i), static_cast<int32_t>(j));
+					m_emptyTileCoordinates.setCoordinates(static_cast<int32_t>(i), static_cast<int32_t>(j));
 				}
 			}
 		}
@@ -78,14 +80,26 @@ public:
 	void moveTile(Direction direction)
 	{
 		Direction oppositeDirection = -direction;
-		Point previousEmpty{ emptyTileCoordinates };
+		Point previousEmpty{ m_emptyTileCoordinates };
 		Point adjacentToEmptyPosition = previousEmpty.getAdjacentPoint(oppositeDirection);
-		if (adjacentToEmptyPosition != emptyTileCoordinates)
+		if (adjacentToEmptyPosition != m_emptyTileCoordinates)
 		{
 			// Reversed because they are stored in row major order in memory
-			std::swap(m_tileBoard[static_cast<size_t>(emptyTileCoordinates.getY())][static_cast<size_t>(emptyTileCoordinates.getX())],
+			std::swap(m_tileBoard[static_cast<size_t>(m_emptyTileCoordinates.getY())][static_cast<size_t>(m_emptyTileCoordinates.getX())],
 				m_tileBoard[static_cast<size_t>(adjacentToEmptyPosition.getY())][static_cast<size_t>(adjacentToEmptyPosition.getX())]);
+
+			m_emptyTileCoordinates = adjacentToEmptyPosition;
 		}
+	}
+	
+	void printEmptyTile()
+	{
+		std::cout << '[' << m_emptyTileCoordinates.getX() << ']' << '[' << m_emptyTileCoordinates.getY() << ']' << '\n';
+	}
+
+	void randomize()
+	{
+
 	}
 
 };
