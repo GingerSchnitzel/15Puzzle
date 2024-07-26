@@ -32,28 +32,21 @@
 
 int main()
 {
-    
     Board board{};
+    board.randomize(BoardConstants::shuffler);
     std::cout << board;
 
-    Board board0{};
+    while (!board.playerWon())
+    {
+        char command = BoardInteraction::userCommand();
+        if (command == 'q')
+        {
+            return 0;
+        }
+        board.moveTile(BoardInteraction::charToDirection(command));
+        std::cout << board;
 
-    // [[maybe_unused]] char command = BoardInteraction::userCommand();
-
-    //board.moveTile(BoardInteraction::charToDirection(command));
-    std::cout << board << '\n';
-    //board.printEmptyTile();
-
-    Board board1{};
-    board1.randomize(BoardConstants::shuffler);
-    std::cout << board1 << '\n';
-    board1.printEmptyTile();
-
-
-   
-    
-
-
- 
+    }
+    std::cout << "\n\nYou won!\n\n";
     return 0;
 }

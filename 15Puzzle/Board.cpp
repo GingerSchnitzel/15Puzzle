@@ -18,7 +18,6 @@ char BoardInteraction::userCommand()
 
 		if (command == 'w' || command == 'a' || command == 's' || command == 'd')
 		{
-			std::cout << "Valid command: " << command << '\n';
 			return command;
 		}
 

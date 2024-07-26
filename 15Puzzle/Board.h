@@ -113,6 +113,12 @@ public:
 		return lhs.m_tileBoard == rhs.m_tileBoard;
 	}
 
+	bool playerWon() const
+	{
+		static Board s_solved{};  
+		return s_solved == *this; 
+	}
+
 };
 
 #endif
