@@ -16,23 +16,10 @@ public:
 		: m_number(number)
 	{}
 
-	const int32_t& getNumber() const { return m_number; }
-	bool isEmpty() const { return (m_number == 0); }
-
-	friend std::ostream& operator<< (std::ostream& out, const Tile& tile)
-	{
-		if (tile.m_number > 9) 
-			out << " " << tile.m_number << " ";
-		else if (tile.m_number > 0) 
-			out << "  " << tile.m_number << " ";
-		else if (tile.m_number == 0) 
-			out << "    ";
-		return out;
-	}
-	friend bool operator==(const Tile& lhs, const Tile& rhs)
-	{
-		return lhs.m_number == rhs.m_number;
-	}
+	const int32_t& getNumber() const;
+	bool isEmpty() const;
+	friend std::ostream& operator<< (std::ostream& out, const Tile& tile);
+	friend bool operator==(const Tile& lhs, const Tile& rhs);
 };
 
 #endif

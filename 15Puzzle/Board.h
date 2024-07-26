@@ -55,69 +55,13 @@ public:
 		}
 	}
 
-	static void printEmptyLines(int32_t count)
-	{
-		for (int i{ 0 }; i < count; ++i)
-		{
-			std::cout << '\n';
-		}
-	}
-
-	void moveTile(Direction direction)
-	{
-		Direction oppositeDirection = -direction;
-		Point previousEmpty{ m_emptyTileCoordinates };
-		Point adjacentToEmptyPosition = previousEmpty.getAdjacentPoint(oppositeDirection);
-		if (adjacentToEmptyPosition != m_emptyTileCoordinates)
-		{
-			// Reversed because they are stored in row major order in memory
-			std::swap(m_tileBoard[static_cast<size_t>(m_emptyTileCoordinates.getY())][static_cast<size_t>(m_emptyTileCoordinates.getX())],
-				m_tileBoard[static_cast<size_t>(adjacentToEmptyPosition.getY())][static_cast<size_t>(adjacentToEmptyPosition.getX())]);
-
-			m_emptyTileCoordinates = adjacentToEmptyPosition;
-		}
-	}
-
-	void printEmptyTile()
-	{
-		std::cout << '[' << m_emptyTileCoordinates.getX() << ']' << '[' << m_emptyTileCoordinates.getY() << ']' << '\n';
-	}
-
-	void randomize(int32_t count)
-	{
-		for (size_t i{ 0 }; i < count; ++i)
-		{
-			moveTile(static_cast<Direction>(Random::selectRandomOrientation()));
-		}
-
-	}
-
-	friend std::ostream& operator<< (std::ostream& out, const Board& board)
-
-	{
-		printEmptyLines(BoardConstants::consoleLines);
-
-		for (size_t i{ 0 }; i < board.m_tileBoard.size(); ++i)
-		{
-			for (size_t j{ 0 }; j < board.m_tileBoard.size(); ++j)
-			{
-				out << board.m_tileBoard[i][j];
-			}
-			out << '\n';
-		}
-		return out;
-	}
-
-	friend bool operator==(const Board& lhs, const Board& rhs)
-	{
-		return lhs.m_tileBoard == rhs.m_tileBoard;
-	}
-
-	bool playerWon() const
-	{
-		static Board s_solved{};  
-		return s_solved == *this; 
-	}
+	static void printEmptyLines(int32_t count);
+	void moveTile(Direction direction);
+	void printEmptyTile();
+	void randomize(int32_t count);
+	friend std::ostream& operator<< (std::ostream& out, const Board& board);
+	friend bool operator==(const Board& lhs, const Board& rhs);
+	bool playerWon() const;
 
 };
 
