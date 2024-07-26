@@ -32,11 +32,8 @@ public:
 		:m_orientation{ orientation }
 	{}
 
-	const Orientation& getOrientation() const { return m_orientation; }
-
-	operator Orientation() const { return m_orientation; }
-
-
+	const Orientation& getOrientation() const;
+	operator Orientation() const;
 	Direction operator-() const;
 	friend std::ostream& operator<<(std::ostream& stream, Direction direction);
 	static Direction selectRandomDirection();

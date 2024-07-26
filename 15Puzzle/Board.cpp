@@ -44,7 +44,39 @@ Direction BoardInteraction::charToDirection(char command)
 	}
 }
 
-inline void Board::printEmptyLines(int32_t count)
+bool BoardInteraction::playAgain()
+{
+	std::cout << "Would you like to play again?";
+	std::string answer;
+
+	while (true)
+	{
+		std::cout << " y/n? ";
+
+		std::getline(std::cin, answer);
+
+		if (answer.length() != 1)
+		{
+			continue;
+		}
+
+		switch (answer[0])
+		{
+		case 'y':
+		case'Y':
+			std::cout << '\n';
+			return true;
+
+		case 'N':
+		case'n':
+
+			std::cout << "Thank you for playing! \n";
+			return false;
+		}
+	}
+}
+
+void Board::printEmptyLines(int32_t count)
 {
 	for (int i{ 0 }; i < count; ++i)
 	{
@@ -52,7 +84,7 @@ inline void Board::printEmptyLines(int32_t count)
 	}
 }
 
-inline void Board::moveTile(Direction direction)
+void Board::moveTile(Direction direction)
 {
 	Direction oppositeDirection = -direction;
 	Point previousEmpty{ m_emptyTileCoordinates };
@@ -67,12 +99,12 @@ inline void Board::moveTile(Direction direction)
 	}
 }
 
-inline void Board::printEmptyTile()
+void Board::printEmptyTile()
 {
 	std::cout << '[' << m_emptyTileCoordinates.getX() << ']' << '[' << m_emptyTileCoordinates.getY() << ']' << '\n';
 }
 
-inline void Board::randomize(int32_t count)
+void Board::randomize(int32_t count)
 {
 	for (size_t i{ 0 }; i < count; ++i)
 	{
@@ -81,7 +113,7 @@ inline void Board::randomize(int32_t count)
 
 }
 
-inline bool Board::playerWon() const
+bool Board::playerWon() const
 {
 	static Board s_solved{};
 	return s_solved == *this;
@@ -90,7 +122,7 @@ inline bool Board::playerWon() const
 std::ostream& operator<<(std::ostream& out, const Board& board)
 
 {
-	printEmptyLines(BoardConstants::consoleLines);
+	Board::printEmptyLines(BoardConstants::consoleLines);
 
 	for (size_t i{ 0 }; i < board.m_tileBoard.size(); ++i)
 	{

@@ -24,7 +24,11 @@ std::ostream& operator<<(std::ostream& stream, Direction direction)
 	}
 }
 
-inline Direction Direction::operator-() const
+const Orientation& Direction::getOrientation() const { return m_orientation; }
+
+Direction::operator Orientation() const { return m_orientation; }
+
+Direction Direction::operator-() const
 {
 	switch (m_orientation)
 	{
@@ -37,7 +41,7 @@ inline Direction Direction::operator-() const
 	return Direction{ Orientation::up };
 }
 
-inline Direction Direction::selectRandomDirection()
+Direction Direction::selectRandomDirection()
 {
 	return (static_cast<Direction>(Random::selectRandomOrientation()));
 }

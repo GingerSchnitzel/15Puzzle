@@ -6,7 +6,6 @@
 #include "Direction.h"
 
 
-
 class Point
 {
 private:

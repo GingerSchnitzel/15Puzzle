@@ -8,6 +8,7 @@
 #include <cstdint>
 #include <utility>
 #include <iostream>
+#include <string>
 
 namespace BoardConstants
 {
@@ -21,6 +22,7 @@ namespace BoardInteraction
 {
 	char userCommand();
 	Direction charToDirection(char command);
+	bool playAgain();
 	
 }
 

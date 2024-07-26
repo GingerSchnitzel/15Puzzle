@@ -1,8 +1,8 @@
 #include "Tile.h"
 
-inline const int32_t& Tile::getNumber() const { return m_number; }
+const int32_t& Tile::getNumber() const { return m_number; }
 
-inline bool Tile::isEmpty() const { return (m_number == 0); }
+bool Tile::isEmpty() const { return (m_number == 0); }
 
 std::ostream& operator<<(std::ostream& out, const Tile& tile)
 {
