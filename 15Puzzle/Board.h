@@ -14,12 +14,14 @@ namespace BoardConstants
 	constexpr int32_t maxTileNumber{ 15 };
 	constexpr size_t boardSize{ 4 };
 	constexpr int32_t consoleLines{ 25 };
+	constexpr int32_t shuffler{ 1000 };
 }
 
 namespace BoardInteraction
 {
 	char userCommand();
 	Direction charToDirection(char command);
+	
 }
 
 class Board
@@ -61,6 +63,35 @@ public:
 		}
 	}
 
+	void moveTile(Direction direction)
+	{
+		Direction oppositeDirection = -direction;
+		Point previousEmpty{ m_emptyTileCoordinates };
+		Point adjacentToEmptyPosition = previousEmpty.getAdjacentPoint(oppositeDirection);
+		if (adjacentToEmptyPosition != m_emptyTileCoordinates)
+		{
+			// Reversed because they are stored in row major order in memory
+			std::swap(m_tileBoard[static_cast<size_t>(m_emptyTileCoordinates.getY())][static_cast<size_t>(m_emptyTileCoordinates.getX())],
+				m_tileBoard[static_cast<size_t>(adjacentToEmptyPosition.getY())][static_cast<size_t>(adjacentToEmptyPosition.getX())]);
+
+			m_emptyTileCoordinates = adjacentToEmptyPosition;
+		}
+	}
+
+	void printEmptyTile()
+	{
+		std::cout << '[' << m_emptyTileCoordinates.getX() << ']' << '[' << m_emptyTileCoordinates.getY() << ']' << '\n';
+	}
+
+	void randomize(int32_t count)
+	{
+		for (size_t i{ 0 }; i < count; ++i)
+		{
+			moveTile(static_cast<Direction>(Random::selectRandomOrientation()));
+		}
+
+	}
+
 	friend std::ostream& operator<< (std::ostream& out, const Board& board)
 
 	{
@@ -77,29 +108,9 @@ public:
 		return out;
 	}
 
-	void moveTile(Direction direction)
+	friend bool operator==(const Board& lhs, const Board& rhs)
 	{
-		Direction oppositeDirection = -direction;
-		Point previousEmpty{ m_emptyTileCoordinates };
-		Point adjacentToEmptyPosition = previousEmpty.getAdjacentPoint(oppositeDirection);
-		if (adjacentToEmptyPosition != m_emptyTileCoordinates)
-		{
-			// Reversed because they are stored in row major order in memory
-			std::swap(m_tileBoard[static_cast<size_t>(m_emptyTileCoordinates.getY())][static_cast<size_t>(m_emptyTileCoordinates.getX())],
-				m_tileBoard[static_cast<size_t>(adjacentToEmptyPosition.getY())][static_cast<size_t>(adjacentToEmptyPosition.getX())]);
-
-			m_emptyTileCoordinates = adjacentToEmptyPosition;
-		}
-	}
-	
-	void printEmptyTile()
-	{
-		std::cout << '[' << m_emptyTileCoordinates.getX() << ']' << '[' << m_emptyTileCoordinates.getY() << ']' << '\n';
-	}
-
-	void randomize()
-	{
-
+		return lhs.m_tileBoard == rhs.m_tileBoard;
 	}
 
 };

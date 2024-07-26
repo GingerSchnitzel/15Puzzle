@@ -3,10 +3,6 @@
 
 #include <iostream>
 #include <cstdint>
-/*
-* CLASS TILE
-* Display an individual tile
-*/
 
 class Tile
 {
@@ -32,6 +28,10 @@ public:
 		else if (tile.m_number == 0) 
 			out << "    ";
 		return out;
+	}
+	friend bool operator==(const Tile& lhs, const Tile& rhs)
+	{
+		return lhs.m_number == rhs.m_number;
 	}
 };
 

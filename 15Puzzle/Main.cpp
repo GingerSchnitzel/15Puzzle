@@ -35,11 +35,22 @@ int main()
     
     Board board{};
     std::cout << board;
-    [[maybe_unused]] char command = BoardInteraction::userCommand();
 
-    board.moveTile(BoardInteraction::charToDirection(command));
+    Board board0{};
+
+    // [[maybe_unused]] char command = BoardInteraction::userCommand();
+
+    //board.moveTile(BoardInteraction::charToDirection(command));
     std::cout << board << '\n';
-    board.printEmptyTile();
+    //board.printEmptyTile();
+
+    Board board1{};
+    board1.randomize(BoardConstants::shuffler);
+    std::cout << board1 << '\n';
+    board1.printEmptyTile();
+
+
+   
     
 
 
