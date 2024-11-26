@@ -15,7 +15,7 @@ namespace BoardConstants
 	constexpr int32_t maxTileNumber{ 15 };
 	constexpr size_t boardSize{ 4 };
 	constexpr int32_t consoleLines{ 25 };
-	constexpr int32_t shuffler{ 1000 };
+	constexpr int32_t shuffler{ 3 };
 }
 
 namespace BoardInteraction
